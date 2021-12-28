@@ -1,10 +1,11 @@
 import requests
 from enum import Enum
 
-from models.assetKline import AssetKline
-from models.assetCode import AssetCode
-from models.timeFrame import TimeFrame
-from exchange import Exchange
+from services.exchange.models.assetKline import AssetKline
+from services.exchange.models.assetCode import AssetCode
+from services.exchange.models.timeFrame import TimeFrame
+
+from services.exchange.exchange import Exchange
 
 
 class BinanceService(Exchange):

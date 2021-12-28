@@ -1,5 +1,5 @@
 from os import close
-from models.assetKline import AssetKline
+from services.exchange.models.assetKline import AssetKline
 
 
 class Exchange:

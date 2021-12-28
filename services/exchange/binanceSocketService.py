@@ -6,9 +6,9 @@ import json
 import websocket
 from websocket import WebSocketApp
 
-from models.assetCode import AssetCode
-from models.timeFrame import TimeFrame
-from models.assetKline import AssetKline
+from services.exchange.models.assetCode import AssetCode
+from services.exchange.models.timeFrame import TimeFrame
+from services.exchange.models.assetKline import AssetKline
 
 
 class BinanceSocketServiceFactory():

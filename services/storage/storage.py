@@ -26,6 +26,6 @@ class Storage(StorageObserver, SocketObserverSubscriber):
             queueAsList = list(self.queue.queue)
             subsciber.update(queueAsList[-subsciber.length:])
 
-    def attach(self, observer: StorageObserverSubscriber, length: int):
+    def attach(self, observer: StorageObserverSubscriber):
         self.observers.append(observer)
-        self.queue.maxsize = max(self.queue.maxsize, length)
+        self.queue.maxsize = max(self.queue.maxsize, observer.length)
