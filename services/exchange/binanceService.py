@@ -36,7 +36,7 @@ class BinanceService(Exchange):
 
         for item in response:
             kline = AssetKline(
-                open=item[1], high=item[2], low=item[3], close=item[4],  volume=item[5])
+                open=item[1], high=item[2], low=item[3], close=item[4],  volume=item[5], isClosed=True)
             result.append(kline)
 
         return result
