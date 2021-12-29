@@ -1,9 +1,8 @@
-import json
-from services.exchange.binanceSocketService import ObserverSubscriber
 from services.exchange.models.assetKline import AssetKline
+from services.storage.observer import StorageObserverSubscriber
 
 
-class StrategyBase(ObserverSubscriber):
+class StrategyBase(StorageObserverSubscriber):
     def checkForSignal(self):
         pass
 
@@ -12,11 +11,3 @@ class StrategyBase(ObserverSubscriber):
 
     def onSellSignal(self):
         pass
-
-    def convertToKline(self, data) -> AssetKline:
-        response = data
-        jsonResponse = json.loads(response)
-        convertedResponse = AssetKline(jsonResponse['k']['o'], jsonResponse['k']["h"], jsonResponse['k']
-                                       ["l"], jsonResponse['k']["c"], jsonResponse['k']["v"], jsonResponse['k']['x'])
-
-        return convertedResponse
