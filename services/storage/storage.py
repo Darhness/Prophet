@@ -1,13 +1,20 @@
 import queue
+from typing import List
 from services.exchange.models.assetKline import AssetKline
 
 from services.storage.observer import SocketObserverSubscriber, StorageObserver, StorageObserverSubscriber
 
 
 class Storage(StorageObserver, SocketObserverSubscriber):
-    def __init__(self) -> None:
+    DEFAULT_QUEUE_LENGTH = 200
+
+    def __init__(self, klineHistory: List[AssetKline] = None) -> None:
         super().__init__()
-        self.queue = queue.Queue(100)
+        queueLength = len(klineHistory)
+        self.queue = queue.Queue(max(queueLength, self.DEFAULT_QUEUE_LENGTH))
+
+        for kline in klineHistory:
+            self.appendQueue(kline)
 
     def update(self, kline: AssetKline):
         if(kline.isClosed):
@@ -24,7 +31,7 @@ class Storage(StorageObserver, SocketObserverSubscriber):
     def notify(self):
         for subsciber in self.observers:
             queueAsList = list(self.queue.queue)
-            subsciber.update(queueAsList[-subsciber.length:])
+            subsciber.update(queueAsList)
 
     def attach(self, observer: StorageObserverSubscriber):
         self.observers.append(observer)

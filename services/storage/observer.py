@@ -4,7 +4,7 @@ from services.exchange.models.assetKline import AssetKline
 
 
 class SocketObserverSubscriber:
-    #TODO - GENERIC
+    # TODO - GENERIC?
     def update(self, kline: AssetKline):
         pass
 
@@ -21,7 +21,7 @@ class StorageObserver:
     def __init__(self) -> None:
         self.observers: List[StorageObserverSubscriber] = []
 
-    def attach(self, observer: StorageObserverSubscriber, length: int):
+    def attach(self, observer: StorageObserverSubscriber):
         pass
 
     def detach(self, observer: StorageObserverSubscriber):
