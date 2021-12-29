@@ -1,4 +1,5 @@
 import numpy as np
+import talib as ta
 from typing import List
 
 from services.exchange.models.assetKline import AssetKline
@@ -7,7 +8,7 @@ from services.exchange.models.assetKline import AssetKline
 class TalibCompatible:
     def __init__(self) -> None:
         self.open = None
-        self.closed = None
+        self.close = None
         self.high = None
         self.low = None
         self.volume = None
@@ -21,22 +22,32 @@ class TechnicalAnalysis:
 
         # TODO code smell
         open = []
-        closed = []
+        close = []
         high = []
         low = []
         volume = []
 
         for kline in klines:
             open.append(float(kline.open))
-            closed.append(float(kline.close))
+            close.append(float(kline.close))
             high.append(float(kline.high))
             low.append(float(kline.low))
             volume.append(float(kline.volume))
 
-        result.closed = np.asanyarray(closed)
+        result.close = np.asanyarray(close)
         result.open = np.asanyarray(open)
         result.high = np.asanyarray(high)
         result.low = np.asanyarray(low)
         result.volume = np.asanyarray(volume)
 
         return result
+
+    @staticmethod
+    def getRSI(data: np.ndarray, length):
+        if(data.size < length):
+            return 0
+
+        rsiList = ta.RSI(data, timeperiod=length)
+        print(rsiList)
+        rsi = float(rsiList[-1])
+        return rsi
