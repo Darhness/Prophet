@@ -47,7 +47,6 @@ class TechnicalAnalysis:
         if(data.size < length):
             return 0
 
-        rsiList = ta.RSI(data, timeperiod=length)
-        print(rsiList)
-        rsi = float(rsiList[-1])
-        return rsi
+        rsiList = ta.RSI(data[0:length + 1], timeperiod=length)
+
+        return float(rsiList[-1])
