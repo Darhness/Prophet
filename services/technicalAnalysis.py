@@ -13,6 +13,14 @@ class TalibCompatible:
         self.low = None
         self.volume = None
 
+    def __str__(self) -> str:
+        string = ""
+        for index in range(len(self.close)):
+            string += "Open:{:.2f}\tHigh:{:.2f}\tLow:{:.2f}\tClose:{:.2f}\tVolume:{:.2f}\n".format(
+                self.open[index], self.high[index], self.low[index], self.close[index], self.volume[index])
+
+        return string
+
 
 class TechnicalAnalysis:
 
@@ -44,9 +52,8 @@ class TechnicalAnalysis:
 
     @staticmethod
     def getRSI(data: np.ndarray, length):
+        # TODO - Optimize calculation by resizing the data array. Instead of calculating all RSI's, use only the last 'length'
         if(data.size < length):
-            return 0
+            return None
 
-        rsiList = ta.RSI(data[0:length + 1], timeperiod=length)
-
-        return float(rsiList[-1])
+        return ta.RSI(data, timeperiod=length)[-1]
