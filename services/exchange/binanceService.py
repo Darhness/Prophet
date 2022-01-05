@@ -11,10 +11,10 @@ class BinanceService(Exchange):
     """ 
     APIs that enables communications towards Binance.
     """
+    BASE_URL = "https://api.binance.com/api/v3/"
 
     def __init__(self, authToken):
         self.authToken = authToken
-        self.BASE_URL = "https://api.binance.com/api/v3/"
 
     def buy():
         pass
@@ -28,8 +28,9 @@ class BinanceService(Exchange):
     def getOrders():
         pass
 
-    def getKlineForAsset(self, code: AssetCode, tradePair: AssetCode, TimeFrame: TimeFrame, limit: int) -> list[AssetKline]:
-        url = self.BASE_URL + \
+    @staticmethod
+    def getKlineForAsset(code: AssetCode, tradePair: AssetCode, TimeFrame: TimeFrame, limit: int) -> list[AssetKline]:
+        url = BinanceService.BASE_URL + \
             "klines?symbol={}&interval={}&limit={}".format(
                 code.value+tradePair.value, TimeFrame.value, limit)
 

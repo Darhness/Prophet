@@ -11,8 +11,7 @@ STORAGE_LENGTH = 200
 rsiStrategySettings = RsiStrategySettings(length=14, buy=25, sell=40)
 strategy = RsiStrategy(rsiStrategySettings)
 
-binanceClient = BinanceService("")
-klineHistory = binanceClient.getKlineForAsset(
+klineHistory = BinanceService.getKlineForAsset(
     AssetCode.BTC, AssetCode.USDT, TimeFrame.oneMinute, STORAGE_LENGTH)
 
 storage = Storage(klineHistory)
