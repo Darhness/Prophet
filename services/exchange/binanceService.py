@@ -8,6 +8,10 @@ from services.exchange.exchange import Exchange
 
 
 class BinanceService(Exchange):
+    """ 
+    APIs that enables communications towards Binance.
+    """
+
     def __init__(self, authToken):
         self.authToken = authToken
         self.BASE_URL = "https://api.binance.com/api/v3/"
