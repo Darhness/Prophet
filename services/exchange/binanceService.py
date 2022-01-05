@@ -1,5 +1,6 @@
 import requests
 
+from services.exchange.binanceConfig import BINANCE_API_URL
 from services.exchange.models.assetKline import AssetKline
 from services.exchange.models.assetCode import AssetCode
 from services.exchange.models.timeFrame import TimeFrame
@@ -11,7 +12,7 @@ class BinanceService(Exchange):
     """ 
     APIs that enables communications towards Binance.
     """
-    BASE_URL = "https://api.binance.com/api/v3/"
+    BASE_URL = BINANCE_API_URL
 
     def __init__(self, authToken):
         self.authToken = authToken

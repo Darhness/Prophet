@@ -2,6 +2,7 @@ import websocket
 from threading import Thread
 from websocket import WebSocketApp
 
+from services.exchange.binanceConfig import BINANCE_SOCKET_API_URL
 from services.exchange.models.assetCode import AssetCode
 from services.exchange.models.timeFrame import TimeFrame
 
@@ -10,7 +11,7 @@ class BinanceSocketServiceFactory():
     """ 
     Factory that helps creating websocket.WebSocketApp clients towards Binance.
     """
-    BASE_URL = "wss://stream.binance.com:9443/ws/"
+    BASE_URL = BINANCE_SOCKET_API_URL
 
     @staticmethod
     def klineSocketClient(assetCode: AssetCode, tradePair: AssetCode, timeFrame: TimeFrame, onMessage, onClose) -> websocket.WebSocketApp:
