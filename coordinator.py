@@ -1,25 +1,22 @@
 import json
-from typing import List
 
 from services.exchange.binanceService import AssetCode, BinanceService, TimeFrame
 from services.exchange.binanceSocketService import BinanceSocketServiceFactory
 from services.exchange.models.assetKline import AssetKline
-from services.storage.observer import StorageObserverSubscriber
 from services.storage.storage import Storage
-from services.technicalAnalysis import TechnicalAnalysis
 from strategies.rsiStrategy import RsiStrategy, RsiStrategySettings
 
 STORAGE_LENGTH = 200
 
-stratSettings = RsiStrategySettings(14, 25, 40)
-strat = RsiStrategy(stratSettings)
+rsiStrategySettings = RsiStrategySettings(length=14, buy=25, sell=40)
+strategy = RsiStrategy(rsiStrategySettings)
 
 binanceClient = BinanceService("")
 klineHistory = binanceClient.getKlineForAsset(
     AssetCode.BTC, AssetCode.USDT, TimeFrame.oneMinute, STORAGE_LENGTH)
 
 storage = Storage(klineHistory)
-storage.attach(strat)
+storage.attach(strategy)
 
 
 def onClose(ws):
@@ -29,6 +26,7 @@ def onClose(ws):
 def convertThanNotify(*values: object):
     response = values[1]
     jsonResponse = json.loads(response)
+
     convertedResponse = AssetKline(
         open=jsonResponse['k']['o'],
         high=jsonResponse['k']["h"],

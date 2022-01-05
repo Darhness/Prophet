@@ -28,7 +28,6 @@ class TechnicalAnalysis:
     def convertToTalibCompatible(klines: List[AssetKline]) -> TalibCompatible:
         result = TalibCompatible()
 
-        # TODO code smell
         open = []
         close = []
         high = []
@@ -52,7 +51,6 @@ class TechnicalAnalysis:
 
     @staticmethod
     def getRSI(data: np.ndarray, length):
-        # TODO - Optimize calculation by resizing the data array. Instead of calculating all RSI's, use only the last 'length'
         if(data.size < length):
             return None
 

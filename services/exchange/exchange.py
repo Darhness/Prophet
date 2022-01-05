@@ -1,4 +1,4 @@
-from os import close
+from services.exchange.models.assetCode import AssetCode
 from services.exchange.models.assetKline import AssetKline
 
 
@@ -30,8 +30,8 @@ class Exchange:
         """
         pass
 
-    def getKlineForAsset(code: str, codePair: str, limit, TimeFrame) -> list[AssetKline]:
+    def getKlineForAsset(code: AssetCode, tradePair: AssetCode, limit, TimeFrame) -> list[AssetKline]:
         """
-        Retrieves the candlesTimeFrame data for an asset.
+        Retrieves the candlestick data for an asset pair in a given time frame.
         """
         pass

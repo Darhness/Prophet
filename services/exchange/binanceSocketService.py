@@ -1,14 +1,9 @@
-from typing import List
-from websocket import create_connection
-from threading import Thread
-import json
-
 import websocket
+from threading import Thread
 from websocket import WebSocketApp
 
 from services.exchange.models.assetCode import AssetCode
 from services.exchange.models.timeFrame import TimeFrame
-from services.exchange.models.assetKline import AssetKline
 
 
 class BinanceSocketServiceFactory():
@@ -34,20 +29,3 @@ class BackgroundWebsocketConnection(Thread):
 
     def stop(self):
         self.socketService.close()
-
-
-if __name__ == '__main__':
-    def onClose(ws):
-        print("Closed")
-
-    def convertThanNotify(*values: object) -> AssetKline:
-        response = values[1]
-        jsonResponse = json.loads(response)
-        convertedResponse = AssetKline(jsonResponse['k']['o'], jsonResponse['k']["h"],
-                                       jsonResponse['k']["l"], jsonResponse['k']["c"], jsonResponse['k']["v"], jsonResponse['k']['x'])
-        print(convertedResponse)
-
-    client = BinanceSocketServiceFactory.klineSocketClient(
-        AssetCode.BTC, AssetCode.USDT, TimeFrame.oneMinute, convertThanNotify, onClose)
-
-    client.run_forever()

@@ -4,15 +4,11 @@ from services.exchange.models.assetKline import AssetKline
 
 
 class SocketObserverSubscriber:
-    # TODO - GENERIC?
     def update(self, kline: AssetKline):
         pass
 
 
 class StorageObserverSubscriber:
-    def __init__(self, length) -> None:
-        self.length = length
-
     def update(self, klines: List[AssetKline]):
         pass
 
@@ -22,7 +18,7 @@ class StorageObserver:
         self.observers: List[StorageObserverSubscriber] = []
 
     def attach(self, observer: StorageObserverSubscriber):
-        pass
+        self.observers.append(observer)
 
     def detach(self, observer: StorageObserverSubscriber):
         self.observers.remove(observer)

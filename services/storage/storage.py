@@ -2,18 +2,25 @@ import queue
 from typing import List
 from services.exchange.models.assetKline import AssetKline
 
-from services.storage.observer import SocketObserverSubscriber, StorageObserver, StorageObserverSubscriber
+from services.storage.observer import SocketObserverSubscriber, StorageObserver
 
 
 class Storage(StorageObserver, SocketObserverSubscriber):
-    DEFAULT_QUEUE_LENGTH = 200
 
-    def __init__(self, klineHistory: List[AssetKline] = None) -> None:
+    def __init__(self, klineHistory: List[AssetKline] = None, queueLength: int = 200) -> None:
         super().__init__()
-        queueLength = len(klineHistory)
-        self.queue = queue.Queue(max(queueLength, self.DEFAULT_QUEUE_LENGTH))
+        self.queue = queue.Queue(queueLength)
 
-        for kline in klineHistory:
+        self.fillQueue(klineHistory)
+
+    def appendQueue(self, kline: AssetKline):
+        if(self.queue.full()):
+            self.queue.get()
+
+        self.queue.put(kline)
+
+    def fillQueue(self, klines: List[AssetKline]):
+        for kline in klines:
             self.appendQueue(kline)
 
     def update(self, kline: AssetKline):
@@ -21,18 +28,7 @@ class Storage(StorageObserver, SocketObserverSubscriber):
             self.appendQueue(kline)
             self.notify()
 
-    def appendQueue(self, kline: AssetKline):
-        # TODO
-        if(self.queue.full()):
-            self.queue.get()
-
-        self.queue.put(kline)
-
     def notify(self):
         for subsciber in self.observers:
             queueAsList = list(self.queue.queue)
             subsciber.update(queueAsList)
-
-    def attach(self, observer: StorageObserverSubscriber):
-        self.observers.append(observer)
-        self.queue.maxsize = max(self.queue.maxsize, observer.length)
