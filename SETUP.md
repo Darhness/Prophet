@@ -1,13 +1,15 @@
-# ta-lib install
+# List of requirements and how to install them
 
-https://www.youtube.com/watch?v=hZIZMMcTQ8c&ab_channel=MartinMayer
+## Commons
 
-1. Download the installer from https://www.lfd.uci.edu/~gohlke/pythonlibs/#ta-lib
-2. pip install _downloaded installer_
+    pip install pandas websocket queue numpy
+
+## ta-lib
+
+1. Download ta-lib installer compatible with your Python from https://www.lfd.uci.edu/~gohlke/pythonlibs/#ta-lib
+2. pip install **downloaded installer**
 3. pip install ta-lib
 
-Helper for this library here https://www.programcreek.com/python/index/7769/talib
+Installer reference [here](https://www.youtube.com/watch?v=hZIZMMcTQ8c&ab_channel=MartinMayer).
 
-# pandas
-
-pip install pandas
+Talib API helper [here](https://www.programcreek.com/python/index/7769/talib).
