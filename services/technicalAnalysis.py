@@ -7,14 +7,14 @@ from services.exchange.models.assetKline import AssetKline
 
 class TalibCompatible:
     def __init__(self, klines: List[AssetKline] = None) -> None:
-        if klines is not None:
-            self.processKlines(klines)
-
         self.open = None
         self.close = None
         self.high = None
         self.low = None
         self.volume = None
+
+        if klines is not None:
+            self.processKlines(klines)
 
     def processKlines(self, klines: List[AssetKline]):
         open = []
