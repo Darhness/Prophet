@@ -25,7 +25,7 @@ class RsiStrategy(StrategyBase):
         self.settings = settings
 
     def update(self, klines: List[AssetKline]):
-        convertedKline = TechnicalAnalysis.convertToTalibCompatible(klines)
+        convertedKline = TalibCompatible(klines)
         processed = RsiStrategyTechnicalAnalysis(convertedKline, klines[-1])
 
         self.checkForSignal(processed)
