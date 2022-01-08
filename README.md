@@ -2,13 +2,13 @@
 
 This repository is the main storing site for the trading bot built by Kálmán Szél.
 
-# Python requirements
+## Python requirements
 
-## Common modules
+### Common modules
 
     pip install pandas websocket queue numpy
 
-## TA-LIB
+### TA-LIB
 
 1. Download a ta-lib installer that is compatible with your Python version from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#ta-lib).
 2. pip install "**installer_from_first_step.whl**"
