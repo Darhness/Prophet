@@ -1,7 +1,7 @@
 import json
 
 from services.exchange.binanceService import AssetCode, BinanceService, TimeFrame
-from services.exchange.binanceSocketService import BinanceSocketServiceFactory
+from services.exchange.binanceSocketService import BinanceWebSocketClientFactory
 from services.exchange.models.assetKline import AssetKline
 from services.storage.storage import Storage
 from strategies.rsiStrategy import RsiStrategy, RsiStrategySettings
@@ -39,7 +39,7 @@ def convertThanNotify(*values: object):
     storage.update(convertedResponse)
 
 
-socketClient = BinanceSocketServiceFactory.klineSocketClient(
+socketClient = BinanceWebSocketClientFactory.createKlineWebSocketClient(
     AssetCode.BTC, AssetCode.USDT, TimeFrame.oneMinute, convertThanNotify, onClose)
 
 socketClient.run_forever()

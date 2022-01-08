@@ -7,14 +7,14 @@ from services.exchange.models.assetCode import AssetCode
 from services.exchange.models.timeFrame import TimeFrame
 
 
-class BinanceSocketServiceFactory():
+class BinanceWebSocketClientFactory():
     """ 
     Factory that helps creating websocket.WebSocketApp clients towards Binance.
     """
     BASE_URL = BINANCE_SOCKET_API_URL
 
     @staticmethod
-    def klineSocketClient(assetCode: AssetCode, tradePair: AssetCode, timeFrame: TimeFrame, onMessage, onClose) -> websocket.WebSocketApp:
+    def createKlineWebSocketClient(assetCode: AssetCode, tradePair: AssetCode, timeFrame: TimeFrame, onMessage, onClose) -> websocket.WebSocketApp:
         """Creates a websocket.WebSocketApp connected to the specified Binance socket service.
 
         Args
@@ -37,7 +37,7 @@ class BinanceSocketServiceFactory():
         """
         market = "{}{}".format(assetCode.value, tradePair.value).lower()
         url = "{0}{1}@kline_{2}".format(
-            BinanceSocketServiceFactory.BASE_URL, market, timeFrame.value)
+            BinanceWebSocketClientFactory.BASE_URL, market, timeFrame.value)
 
         return WebSocketApp(url, on_message=onMessage, on_close=onClose)
 
