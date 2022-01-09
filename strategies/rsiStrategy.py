@@ -17,7 +17,7 @@ class RsiStrategyTechnicalAnalysis:
         self.latestKline = latestKline
 
     def __str__(self) -> str:
-        return "RSI 14: {}\nLatest kline: {}\n".format(self.RSI14, self.latestKline)
+        return "{}RSI_14:{}\n".format(self.latestKline, self.RSI14)
 
 
 class RsiStrategy(StrategyBase):
