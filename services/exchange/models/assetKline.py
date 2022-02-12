@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from datetime import datetime
 
 
@@ -11,6 +12,32 @@ class AssetKline:
         self.isClosed = isClosed
         self.startTime = startTime
         self.closeTime = closeTime
+
+    @staticmethod
+    def fromBinanceSocketResponse(jsonResponse) -> None:
+        return AssetKline(
+            open=jsonResponse['k']['o'],
+            high=jsonResponse['k']["h"],
+            low=jsonResponse['k']['l'],
+            close=jsonResponse['k']["c"],
+            volume=jsonResponse['k']["v"],
+            isClosed=jsonResponse['k']['x'],
+            startTime=jsonResponse['k']['t'],
+            closeTime=jsonResponse['k']['T']
+        )
+
+    @staticmethod
+    def fromBinanceApiResponse(jsonResponse):
+        return AssetKline(
+            open=jsonResponse[1],
+            high=jsonResponse[2],
+            low=jsonResponse[3],
+            close=jsonResponse[4],
+            volume=jsonResponse[5],
+            isClosed=True,
+            startTime=jsonResponse[0],
+            closeTime=jsonResponse[7]
+        )
 
     def __str__(self):
         unixTimeStamp = int(self.closeTime)

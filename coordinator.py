@@ -26,16 +26,7 @@ def convertThanNotify(*values: object):
     response = values[1]
     jsonResponse = json.loads(response)
 
-    convertedResponse = AssetKline(
-        open=jsonResponse['k']['o'],
-        high=jsonResponse['k']["h"],
-        low=jsonResponse['k']['l'],
-        close=jsonResponse['k']["c"],
-        volume=jsonResponse['k']["v"],
-        isClosed=jsonResponse['k']['x'],
-        startTime=jsonResponse['k']['t'],
-        closeTime=jsonResponse['k']['T']
-    )
+    convertedResponse = AssetKline.fromBinanceSocketResponse(jsonResponse)
     storage.update(convertedResponse)
 
 

@@ -39,16 +39,7 @@ class BinanceService(Exchange):
         klines = []
 
         for item in response:
-            kline = AssetKline(
-                open=item[1],
-                high=item[2],
-                low=item[3],
-                close=item[4],
-                volume=item[5],
-                isClosed=True,
-                startTime=item[0],
-                closeTime=item[7]
-            )
+            kline = AssetKline.fromBinanceApiResponse(item)
             klines.append(kline)
 
         return klines
