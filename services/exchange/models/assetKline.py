@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from datetime import datetime
 
 
@@ -38,6 +37,19 @@ class AssetKline:
             startTime=jsonResponse[0],
             closeTime=jsonResponse[7]
         )
+    
+    @staticmethod
+    def asCompressedDictionary(klines : list)-> dict:
+        return {
+            "open": [n.open for n in klines],
+            "high":[n.high for n in klines],
+            "low":[n.low for n in klines],
+            "close":[n.close for n in klines],
+            "volume":[n.volume for n in klines],
+            "isClosed":[n.isClosed for n in klines],
+            "startTime":[n.startTime for n in klines],
+            "closeTime":[n.closeTime for n in klines]
+        }
 
     def __str__(self):
         unixTimeStamp = int(self.closeTime)
