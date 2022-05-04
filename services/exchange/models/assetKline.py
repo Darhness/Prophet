@@ -13,7 +13,7 @@ class AssetKline:
         self.closeTime = closeTime
 
     @staticmethod
-    def fromBinanceSocketResponse(jsonResponse) -> None:
+    def fromBinanceSocketResponse(jsonResponse):
         return AssetKline(
             open=jsonResponse['k']['o'],
             high=jsonResponse['k']["h"],
