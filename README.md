@@ -6,7 +6,7 @@ This repository is the main storing site for the trading bot built by Kálmán S
 
 ### Common modules
 
-    pip install pandas websocket-client numpy requests
+    pip install pandas websocket-client numpy requests python-binance
 
 ### TA-LIB
 

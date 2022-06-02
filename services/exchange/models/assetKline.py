@@ -35,7 +35,7 @@ class AssetKline:
             volume=jsonResponse[5],
             isClosed=True,
             startTime=jsonResponse[0],
-            closeTime=jsonResponse[7]
+            closeTime=jsonResponse[6]
         )
     
     @staticmethod
