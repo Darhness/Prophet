@@ -23,7 +23,6 @@ class KlineRequest:
 
         return "klines?{}&interval={}{}{}{}".format(symbol, self.timeFrame.value, startTime, endTime, limit)
 
-
 class KlineRequestBuilder:
     def __init__(self, code: AssetCode, tradePair: AssetCode, timeFrame: TimeFrame) -> None:
         self.request = KlineRequest(code, tradePair, timeFrame)
@@ -80,7 +79,6 @@ class BinanceWebSocketClientFactory():
             BinanceWebSocketClientFactory.BASE_URL, market, timeFrame.value)
 
         return WebSocketApp(url, on_message=onMessage, on_close=onClose)
-
 
 class BackgroundWebsocketConnection(Thread):
     """ 
