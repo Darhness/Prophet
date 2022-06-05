@@ -1,10 +1,8 @@
 import numpy as np
 import talib as ta
-from assetKlineHistoryRetriever import AssetKlineHistoryRetriever
-from services.exchange.models.assetKline import AssetKline
-
-
 from binance.client import Client
+
+from assetKlineHistoryRetriever import AssetKlineHistoryRetriever
 from services.exchange.binanceConfig import BINANCE_API_KEY, BINANCE_SECRET_KEY
 from services.exchange.models.assetKline import AssetKline
 
