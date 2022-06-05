@@ -53,6 +53,11 @@ class AssetKlineHistoryRetriever:
 
 
 if __name__ == "__main__":
+    """
+    NOTE
+
+    Binance history has gaps in it! Correct it if needed!
+    """
     selectedSymbol = "BTCUSDT"
     selectedInterval = Client.KLINE_INTERVAL_5MINUTE
 
