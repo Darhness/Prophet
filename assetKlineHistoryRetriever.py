@@ -54,11 +54,13 @@ class AssetKlineHistoryRetriever:
 
 if __name__ == "__main__":
     selectedSymbol = "BTCUSDT"
-    selectedInterval = Client.KLINE_INTERVAL_30MINUTE
+    selectedInterval = Client.KLINE_INTERVAL_5MINUTE
 
     client = Client(BINANCE_API_KEY, BINANCE_SECRET_KEY)
     dataCollector = AssetKlineHistoryRetriever(client)
+    
     klines = dataCollector.getHistory(
-        "BTCUSDT", Client.KLINE_INTERVAL_30MINUTE)
+        selectedSymbol, selectedInterval)
 
-    AssetKline.saveToCsv("{}_{}".format(selectedSymbol, selectedInterval), klines)
+    AssetKline.saveToCsv("{}_{}".format(
+        selectedSymbol, selectedInterval), klines)
