@@ -1,4 +1,5 @@
 from binance.client import Client
+
 from services.exchange.binanceConfig import BINANCE_API_KEY, BINANCE_SECRET_KEY
 from services.exchange.models.assetKline import AssetKline
 
@@ -63,7 +64,7 @@ if __name__ == "__main__":
 
     client = Client(BINANCE_API_KEY, BINANCE_SECRET_KEY)
     dataCollector = AssetKlineHistoryRetriever(client)
-    
+
     klines = dataCollector.getHistory(
         selectedSymbol, selectedInterval)
 
