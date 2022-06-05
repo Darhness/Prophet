@@ -1,4 +1,8 @@
+import csv
 from datetime import datetime
+
+ASSET_KLINE_FIELDS = ["startTime", "closeTime", "open",
+                      "high", "low", "close", "volume", "isClosed"]
 
 
 class AssetKline:
@@ -37,19 +41,33 @@ class AssetKline:
             startTime=jsonResponse[0],
             closeTime=jsonResponse[6]
         )
-    
+
+    # TODO - replace this to AssetKlineUtils
     @staticmethod
-    def asCompressedDictionary(klines : list)-> dict:
+    def asCompressedDictionary(klines: list) -> dict:
         return {
             "open": [n.open for n in klines],
-            "high":[n.high for n in klines],
-            "low":[n.low for n in klines],
-            "close":[n.close for n in klines],
-            "volume":[n.volume for n in klines],
-            "isClosed":[n.isClosed for n in klines],
-            "startTime":[n.startTime for n in klines],
-            "closeTime":[n.closeTime for n in klines]
+            "high": [n.high for n in klines],
+            "low": [n.low for n in klines],
+            "close": [n.close for n in klines],
+            "volume": [n.volume for n in klines],
+            "isClosed": [n.isClosed for n in klines],
+            "startTime": [n.startTime for n in klines],
+            "closeTime": [n.closeTime for n in klines]
         }
+
+    # TODO - replace this to AssetKlineUtils
+    @staticmethod
+    def saveToCsv(fileName: str, klines: list):
+        with open("{}.csv".format(fileName), 'a', encoding="UTF8", newline='') as f:
+
+            klinesAsDict = []
+            for item in klines:
+                klinesAsDict.append(item.__dict__)
+
+            writer = csv.DictWriter(f, fieldnames=ASSET_KLINE_FIELDS)
+            writer.writeheader()
+            writer.writerows(klinesAsDict)
 
     def __str__(self):
         unixTimeStamp = int(self.closeTime)
