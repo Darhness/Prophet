@@ -61,4 +61,4 @@ if __name__ == "__main__":
     klines = dataCollector.getHistory(
         "BTCUSDT", Client.KLINE_INTERVAL_30MINUTE)
 
-    AssetKline.saveToCsv("BTCUSDT_30m2", klines)
+    AssetKline.saveToCsv("{}_{}".format(selectedSymbol, selectedInterval), klines)
