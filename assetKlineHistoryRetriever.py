@@ -2,21 +2,22 @@ from binance.client import Client
 from services.exchange.binanceConfig import BINANCE_API_KEY, BINANCE_SECRET_KEY
 from services.exchange.models.assetKline import AssetKline
 
-#This is pre-selected date, in order to keep data consistent.
-#USDT shown a lot of divergence from 1$ before this date.
+# This is pre-selected date, in order to keep data consistent.
+# USDT shown a lot of divergence from 1$ before this date.
 INIT_YEAR_IN_EPOCH_MILLISEC = 1535760001000
 
 Klines = list[AssetKline]
+
 
 class AssetKlineHistoryRetriever:
     """ 
     Class that helps to collect and save historical data of any asset from the Binance database.
     """
-    
-    def __init__(self, binanceClient : Client) -> None:
+
+    def __init__(self, binanceClient: Client) -> None:
         self.binanceClient = binanceClient
 
-    def getHistory(self, symbol : str, interval : str, fromDateInEpochMillisec : int = INIT_YEAR_IN_EPOCH_MILLISEC) -> Klines:
+    def getHistory(self, symbol: str, interval: str, fromDateInEpochMillisec: int = INIT_YEAR_IN_EPOCH_MILLISEC) -> Klines:
         """
         Args
         ---
@@ -34,10 +35,11 @@ class AssetKlineHistoryRetriever:
         ---
         A list of AssetKline records starting from fromDateInEpochMillisec until now.
         """
-        klines : list[AssetKline] = []     
-        
+        klines: list[AssetKline] = []
+
         while True:
-            response = self.binanceClient.get_historical_klines(symbol, interval, fromDateInEpochMillisec)
+            response = self.binanceClient.get_historical_klines(
+                symbol, interval, fromDateInEpochMillisec)
 
             if(len(response) <= 0):
                 break
@@ -46,7 +48,7 @@ class AssetKlineHistoryRetriever:
                 klines.append(AssetKline.fromBinanceApiResponse(item))
 
             fromDateInEpochMillisec = klines[-1].closeTime
-            
+
         return klines
 
 
@@ -54,9 +56,9 @@ if __name__ == "__main__":
     selectedSymbol = "BTCUSDT"
     selectedInterval = Client.KLINE_INTERVAL_30MINUTE
 
-
     client = Client(BINANCE_API_KEY, BINANCE_SECRET_KEY)
     dataCollector = AssetKlineHistoryRetriever(client)
-    klines = dataCollector.getHistory("BTCUSDT", Client.KLINE_INTERVAL_30MINUTE)
-    
+    klines = dataCollector.getHistory(
+        "BTCUSDT", Client.KLINE_INTERVAL_30MINUTE)
+
     AssetKline.saveToCsv("BTCUSDT_30m2", klines)
