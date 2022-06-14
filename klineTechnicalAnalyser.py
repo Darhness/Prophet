@@ -91,6 +91,11 @@ if __name__ == "__main__":
     klines = dataCollector.getHistory(
         selectedSymbol, selectedInterval)
 
-    result = KlineTechnicalAnalyser(klines).ATR(14).get()
-    print(result["ATR14"][-1])
+    result = KlineTechnicalAnalyser(klines).ATR(
+        14).CCI(14).RSI(14).MA(20).MA(50).get()
+
     print(result["ATR14"][-2])
+    print(result["RSI14"][-2])
+    print(result["CCI14"][-2])
+    print(result["MA20"][-2])
+    print(result["MA50"][-2])
