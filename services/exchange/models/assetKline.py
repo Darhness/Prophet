@@ -42,6 +42,19 @@ class AssetKline:
             closeTime=jsonResponse[6]
         )
 
+    @staticmethod
+    def fromTiingoApiResponse(jsonResponse):
+        return AssetKline(
+            open=jsonResponse['open'],
+            high=jsonResponse['high'],
+            low=jsonResponse['low'],
+            close=jsonResponse['close'],
+            volume=jsonResponse['volume'],
+            isClosed=True,
+            startTime=jsonResponse['date'],
+            closeTime=jsonResponse['date']
+        )
+
     # TODO - replace this to AssetKlineUtils
     @staticmethod
     def asCompressedDictionary(klines: list) -> dict:
