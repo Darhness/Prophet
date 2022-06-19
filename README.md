@@ -22,8 +22,7 @@ Talib API helper [here](https://www.programcreek.com/python/index/7769/talib).
 ## Configuration
 In order to make requests towards Binance and Tiingo, you have to have set the fields listed in the config folder.
 
-Your Binance information can be found [here](https://www.binance.com/en/my/settings/api-management).
-
-Tiingo API token can be found [here](https://www.tiingo.com/account/api/token).
+- Your Binance information can be found [here](https://www.binance.com/en/my/settings/api-management).
+- Tiingo API token can be found [here](https://www.tiingo.com/account/api/token).
 
 *Note, both platform are free to use but requires registration.*
