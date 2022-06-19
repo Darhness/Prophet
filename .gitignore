@@ -133,3 +133,6 @@ dmypy.json
 
 # Locally generated CSV's
 /data
+
+# Local config ignore
+/config
