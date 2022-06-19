@@ -1,15 +1,17 @@
 from typing import List
 
-from services.exchange.models.assetKline import AssetKline
+from models.assetKline import AssetKline
 
 
 class SocketObserverSubscriber:
     def update(self, kline: AssetKline):
         pass
 
+
 class StorageObserverSubscriber:
     def update(self, klines: List[AssetKline]):
         pass
+
 
 class StorageObserver:
     def __init__(self) -> None:

@@ -1,13 +1,13 @@
 import numpy as np
 import talib as ta
 from binance.client import Client
+from config.binanceConfig import BINANCE_API_KEY, BINANCE_SECRET_KEY
+from models.assetKline import AssetKline
 
-from assetKlineHistoryRetriever import AssetKlineHistoryRetriever
-from services.exchange.binanceConfig import BINANCE_API_KEY, BINANCE_SECRET_KEY
-from services.exchange.models.assetKline import AssetKline
+from utils.klineHistoryRetriever import KlineHistoryRetriever
 
 
-class KlineTechnicalAnalyser:
+class TechnicalAnalyser:
 
     def __init__(self, klines: list[AssetKline]) -> None:
         self.klines = klines
@@ -86,12 +86,12 @@ if __name__ == "__main__":
     selectedInterval = Client.KLINE_INTERVAL_8HOUR
 
     client = Client(BINANCE_API_KEY, BINANCE_SECRET_KEY)
-    dataCollector = AssetKlineHistoryRetriever(client)
+    dataCollector = KlineHistoryRetriever(client)
 
     klines = dataCollector.getHistory(
         selectedSymbol, selectedInterval)
 
-    result = KlineTechnicalAnalyser(klines).ATR(
+    result = TechnicalAnalyser(klines).ATR(
         14).CCI(14).RSI(14).MA(20).MA(50).get()
 
     print(result["ATR14"][-2])

@@ -131,6 +131,5 @@ dmypy.json
 # collection
 /collection
 
-# private
-strategies/pines/
-services/exchange/binanceConfig.py
+# Locally generated CSV's
+/data

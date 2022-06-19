@@ -1,8 +1,9 @@
 import queue
 from typing import List
-from services.exchange.models.assetKline import AssetKline
 
-from services.storage.observer import SocketObserverSubscriber, StorageObserver
+from models.assetKline import AssetKline
+
+from observer import SocketObserverSubscriber, StorageObserver
 
 
 class Storage(StorageObserver, SocketObserverSubscriber):

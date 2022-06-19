@@ -1,22 +1,23 @@
 import datetime
 import json
-from binance.client import Client
-import requests
 
-from services.exchange.binanceConfig import BINANCE_API_KEY, BINANCE_SECRET_KEY, TIINGO_API_KEY
-from services.exchange.models.assetKline import AssetKline
+import requests
+from binance.client import Client
+from config.binanceConfig import BINANCE_API_KEY, BINANCE_SECRET_KEY
+from config.tiingoConfig import TIINGO_API_KEY
+from models.assetKline import AssetKline
 
 # This is pre-selected date, in order to keep data consistent.
 # USDT shown a lot of divergence from 1$ before this date.
-INIT_YEAR_IN_EPOCH_MILLISEC = 1535760001000
-INIT_YEAR_IN_DATE = "2018-09-01"
+INIT_DATE_EPOCH_MILLISEC = 1535760001000
+INIT_DATE = "2018-09-01"
 
 TIINGO_MAX_CONTENT_LENGTH = 10000
 
 Klines = list[AssetKline]
 
 
-class AssetKlineHistoryRetriever:
+class KlineHistoryRetriever:
     """ 
     Class that helps to collect and save historical data of any crypto/stock asset.
     """
@@ -24,7 +25,7 @@ class AssetKlineHistoryRetriever:
     def __init__(self, binanceClient: Client) -> None:
         self.binanceClient = binanceClient
 
-    def getHistory(self, symbol: str, interval: str, fromDateInEpochMillisec: int = INIT_YEAR_IN_EPOCH_MILLISEC) -> Klines:
+    def getHistory(self, symbol: str, interval: str, fromDateInEpochMillisec: int = INIT_DATE_EPOCH_MILLISEC) -> Klines:
         """
         Args
         ---
@@ -58,7 +59,7 @@ class AssetKlineHistoryRetriever:
 
         return klines
 
-    def getStockHistory(self, symbol: str, interval: str, startDate: str = INIT_YEAR_IN_DATE, afterHours: str = "false") -> Klines:
+    def getStockHistory(self, symbol: str, interval: str, startDate: str = INIT_DATE, afterHours: str = "false") -> Klines:
         """
         Learn more at https://api.tiingo.com/documentation/iex.
         """
@@ -90,12 +91,11 @@ if __name__ == "__main__":
     Binance history has gaps in it! Correct it if needed!
     """
 
-    """
     selectedSymbol = "BTCUSDT"
-    selectedInterval = Client.KLINE_INTERVAL_5MINUTE
+    selectedInterval = Client.KLINE_INTERVAL_1HOUR
 
     client = Client(BINANCE_API_KEY, BINANCE_SECRET_KEY)
-    dataCollector = AssetKlineHistoryRetriever(client)
+    dataCollector = KlineHistoryRetriever(client)
 
     klines = dataCollector.getHistory(
         selectedSymbol, selectedInterval)
@@ -105,10 +105,11 @@ if __name__ == "__main__":
     selectedInterval = "1hour"
 
     client = None
-    dataCollector = AssetKlineHistoryRetriever(client)
+    dataCollector = KlineHistoryRetriever(client)
 
     klines = dataCollector.getStockHistory(
         selectedSymbol, selectedInterval, afterHours="true")
+    """
 
-    AssetKline.saveToCsv("{}_{}".format(
-        selectedSymbol, selectedInterval), klines)
+    # AssetKline.saveToCsv("{}_{}".format(
+    #    selectedSymbol, selectedInterval), klines)
