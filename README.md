@@ -1,4 +1,4 @@
-# TradingBot
+# Prophet
 
 The aim of this project is to create a tool that can make predictions of stock or crypto currency assets prices based on historical data.
 
