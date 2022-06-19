@@ -16,4 +16,12 @@ Talib is originally a C library that contains more than 150 trading indicator al
 3. Install the python module that enables us to use this library. `pip install ta-lib`
 
 Install reference [here](https://www.youtube.com/watch?v=hZIZMMcTQ8c&ab_channel=MartinMayer).
+
 Talib API helper [here](https://www.programcreek.com/python/index/7769/talib).
+
+## Configuration
+In order to make a successfull request towards Binance and Tiingo, you have to have set the fields listed in the config folder.
+Your Binance information can be found [here](https://www.binance.com/en/my/settings/api-management).
+Tiingo API token can be found [here](https://www.tiingo.com/account/api/token).
+
+*Note, both platform are free to use but requires registration.*
