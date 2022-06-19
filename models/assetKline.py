@@ -1,6 +1,4 @@
-import csv
 from datetime import datetime
-
 
 ASSET_KLINE_FIELDS = ["startTime", "closeTime", "open",
                       "high", "low", "close", "volume", "isClosed"]

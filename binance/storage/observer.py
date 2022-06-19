@@ -1,6 +1,6 @@
-from typing import List
-
 from models.assetKline import AssetKline
+
+Klines = list[AssetKline]
 
 
 class SocketObserverSubscriber:
@@ -9,13 +9,13 @@ class SocketObserverSubscriber:
 
 
 class StorageObserverSubscriber:
-    def update(self, klines: List[AssetKline]):
+    def update(self, klines: Klines):
         pass
 
 
 class StorageObserver:
     def __init__(self) -> None:
-        self.observers: List[StorageObserverSubscriber] = []
+        self.observers: list[StorageObserverSubscriber] = []
 
     def attach(self, observer: StorageObserverSubscriber):
         self.observers.append(observer)

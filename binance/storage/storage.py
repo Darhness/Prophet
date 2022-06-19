@@ -1,14 +1,15 @@
 import queue
-from typing import List
 
 from models.assetKline import AssetKline
 
 from observer import SocketObserverSubscriber, StorageObserver
 
+Klines = list[AssetKline]
+
 
 class Storage(StorageObserver, SocketObserverSubscriber):
 
-    def __init__(self, klineHistory: List[AssetKline] = None, queueLength: int = 200) -> None:
+    def __init__(self, klineHistory: Klines = None, queueLength: int = 200) -> None:
         super().__init__()
         self.queue = queue.Queue(queueLength)
 
@@ -20,7 +21,7 @@ class Storage(StorageObserver, SocketObserverSubscriber):
 
         self.queue.put(kline)
 
-    def fillQueue(self, klines: List[AssetKline]):
+    def fillQueue(self, klines: Klines):
         for kline in klines:
             self.appendQueue(kline)
 
