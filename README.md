@@ -1,6 +1,6 @@
 # TradingBot
 
-The aim of this project is to create a tool, that can help make future price predictions of stock or crypto currency assets on the market.
+The aim of this project is to create a tool that can make predictions of stock or crypto currency assets prices based on historical data.
 
 ## Python requirements
 
@@ -25,4 +25,4 @@ In order to make requests towards Binance and Tiingo, you have to have set the f
 - Your Binance information can be found [here](https://www.binance.com/en/my/settings/api-management).
 - Tiingo API token can be found [here](https://www.tiingo.com/account/api/token).
 
-*Note, both platform are free to use but requires registration.*
+*Note, both platforms are free to use but requires registration.*
